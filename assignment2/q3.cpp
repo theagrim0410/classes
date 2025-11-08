@@ -6,6 +6,8 @@ using namespace std;
 
 class Solution {
 public:
+    vector<string> result;
+    string current = "";
     vector<string> letterCombinations(string digits) {
         if (digits.empty()) return {};
         vector<string> mpp = {
@@ -20,16 +22,11 @@ public:
             "tuv", 
             "wxyz"
         };
-
-        vector<string> result;
-        string current = "";
-
-        helper(0, digits, current, result, mpp);
+        helper(0, digits, mpp);
         return result;
     }
-
-private:
-    void helper(int index, string &digits, string &current, vector<string> &result, vector<string> &mpp) {
+    
+    void helper(int index, string &digits, vector<string>&mpp) {
         if (index == digits.size()) {
             result.push_back(current);
             return;
@@ -38,7 +35,7 @@ private:
         string letters = mpp[find];
         for (char ch : letters) {
             current.push_back(ch);
-            helper(index + 1, digits, current, result, mpp);
+            helper(index + 1, digits, mpp);
             current.pop_back();
         }
     }
