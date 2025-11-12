@@ -1,18 +1,17 @@
-#include <bits/stdc++.h>
 #include<iostream>
 #include<vector>
 #include<algorithm>
-
 using namespace std;
 
-long long solve(int x, vector<long long>& sum) {
-    if (x == 0) return 0;
-    if (x == 1) return sum[1];
-
-    return max(solve(x - 1, sum), solve(x - 2, sum) + sum[x]);
+int solve(vector<int>&freq, int i , int end , vector<int>&dp){
+    if(i > end) return 0;
+    if(dp[i] != -1) return dp[i];
+    int yes = freq[i] * i + solve(freq, i + 2, end, dp);
+    int no = 0 + solve(freq, i + 1, end, dp);
+    return dp[i] = max(yes, no);
 }
 
-int main() {
+int main(){
     int n;
     cin >> n;
 
@@ -22,11 +21,12 @@ int main() {
 
     int mx = *max_element(a.begin(), a.end());
 
-    vector<long long> freq(mx + 1, 0), sum(mx + 1, 0);
+    vector<int> freq(mx + 1, 0);
     for (int num : a)
         freq[num]++;
 
-    for (int i = 1; i <= mx; i++)
-        sum[i] = 1LL * i * freq[i];
-    cout << solve(mx, sum) << endl;
+    vector<int> dp(mx + 1, -1);
+    cout << solve(freq, 0, mx, dp) << endl;
+
+    return 0;
 }
