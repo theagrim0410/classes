@@ -44,7 +44,7 @@ class Solution {
 int main() {
     Solution sol;
     vector<int> nums = {5, 2, 3, 10, 6, 8};
-    int target = 10;
+    int target = 6;
     cout << sol.perfectSum(nums, target) << endl;
     return 0;
 }
