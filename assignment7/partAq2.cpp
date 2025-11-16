@@ -17,14 +17,12 @@ public:
 
     }
 
-    int findTargetSumWays(vector<int>& nums, int target) {
+    int findTargetSumWays(vector<int>& nums, int target){
         int n = nums.size();
         vector<vector<int>> dp(n, vector<int>(2001, -1)); 
         return solve(n - 1, 0, nums, target, dp);
-
     }
 };
-
 
 int main() {
     Solution sol;
